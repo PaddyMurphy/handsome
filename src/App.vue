@@ -38,7 +38,7 @@
     <div :class="{ open: menuOpen }" class="nav-content">
     </div>
 
-    <div class="content"><!-- home page content --></div>
+    <div class="content" style="background-image: url('static/img/bugaboo-spire.jpg')"><!-- home page content --></div>
 
   </div>
 </template>
