@@ -4,6 +4,8 @@ $container-width: 80vw
 $start-position: -$container-width
 // values taken from Principle
 $defaultEasing: cubic-bezier([0.25, 0.1, 0.25, 1])
+$grey-light: #878080 // secondary nav link
+
 
 body
   color: black
@@ -89,14 +91,36 @@ button
   top: 0
   left: 0
 
+.menus
+  display: flex
+  flex-wrap: wrap
+  margin: 130px 0 0 4vw
+  position: relative
+  z-index: 99
+
 .menu-primary
   display: inline-block
+  flex: 0 1 auto
   line-height: 2
+  margin: 0 4vw 0 0
   position: relative
-  transform: translate(75px, 130px)
   z-index: 6
   li
     opacity: 0
+
+.menu-secondary
+  display: inline-block
+  flex: 1 1 auto
+  line-height: 2.4
+  margin: -3px 0 0
+  position: relative
+  z-index: 6
+  li
+    opacity: 0
+    a
+      color: $grey-light
+      font-size: 0.8em
+      text-transform: uppercase
 
 .nav-content
   left: $start-position

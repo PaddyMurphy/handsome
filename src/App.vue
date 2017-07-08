@@ -22,26 +22,28 @@
     </label>
     <!-- Do not dynamically create menu. This needs to be
          implemented in a static page -->
-    <ul class="menu-primary">
-      <li><a href="">Becoming a Student</a></li>
-      <li><a href="">Current Students</a></li>
-      <li><a href="">Parents & Family</a></li>
-      <li><a href="">Faculty & Staff</a></li>
-      <li><a href="">Alumni</a></li>
-    </ul>
+    <div class="menus">
+      <ul class="menu-primary">
+        <li><a href="">Becoming a Student</a></li>
+        <li><a href="">Current Students</a></li>
+        <li><a href="">Parents & Family</a></li>
+        <li><a href="">Faculty & Staff</a></li>
+        <li><a href="">Alumni</a></li>
+      </ul>
 
-    <ul class="menu-secondary is-hidden">
-      <li><a href="">About Southwestern</a></li>
-      <li><a href="">Majors & Minors</a></li>
-      <li><a href="">Visit Campus</a></li>
-      <li><a href="">Financial Aid</a></li>
-      <li><a href="">Apply</a></li>
-      <li><a href="">Athletics</a></li>
-      <li><a href="">Study Abroad</a></li>
-      <li><a href="">Alumni Success Stories</a></li>
-      <li><a href="">Registrar & Records</a></li>
-      <li><a href="">Student life</a></li>
-    </ul>
+      <ul class="menu-secondary">
+        <li><a href="">About Southwestern</a></li>
+        <li><a href="">Majors & Minors</a></li>
+        <li><a href="">Visit Campus</a></li>
+        <li><a href="">Financial Aid</a></li>
+        <li><a href="">Apply</a></li>
+        <li><a href="">Athletics</a></li>
+        <li><a href="">Study Abroad</a></li>
+        <li><a href="">Alumni Success Stories</a></li>
+        <li><a href="">Registrar & Records</a></li>
+        <li><a href="">Student life</a></li>
+      </ul>
+    </div>
 
     <div :class="{ open: menuOpen }" class="nav-content">
     </div>
@@ -92,33 +94,33 @@ export default {
       - extra content window
         - animate / fade in grey background
         - show content
+      TODO:
+        -
     */
     animateMenu: function () {
+      // const vm = this;
       const navContent = document.querySelector('.nav-content');
       const primaryMenu = document.querySelector('.menu-primary');
-      const primaryLi = document.querySelectorAll('.menu-primary li');
+      const primaryLi = primaryMenu.querySelectorAll('.menu-primary li');
+      const secondaryMenu = document.querySelector('.menu-secondary');
+      const secondaryLi = secondaryMenu.querySelectorAll('.menu-secondary li');
       const menuLabel = document.querySelector('.menu-label');
       const logo = document.querySelector('.logo');
       const appWidth = this.$el.clientWidth;
-      const appDirection = (this.menuOpen) ? appWidth : -appWidth
-      // const dir = (this.menuOpen) ? 'normal' : 'reverse';
-      const menuOpacity = (this.menuOpen) ? 1 : 0;
+      const appDirection = this.menuOpen ? appWidth : -appWidth;
+      const menuOpacity = this.menuOpen ? 1 : 0;
+      const defaultTiming = 650;
 
       let navTimeline = anime.timeline({
         autoplay: true
       });
-      // Menu Container
+      // Nav container with white background
       anime({
         targets: navContent,
         translateX: appDirection,
         easing: this.defaultEasing,
-        duration: 650,
+        duration: defaultTiming,
         begin: function (anim) {
-          // if (this.menuOpen) {
-          //   navTimeline.play()
-          // } else {
-          //   navTimeline.restart()
-          // }
           setTimeout(function () {
             logo.classList.toggle('opened')
           }, 200)
@@ -128,20 +130,38 @@ export default {
           }, 300)
         }
       })
-      // TODO: reset animation onclose
-      // currently janky if you click fast
+      // NOTE: setting duration on open only
+      //       and resetting to 0 on close
       navTimeline
         .add({
           targets: primaryMenu,
           opacity: menuOpacity,
+          duration: defaultTiming,
           delay: -500
         })
         .add({
           targets: primaryLi,
+          elasticity: 0,
           translateX: this.menuOpen ? 20 : 0,
           opacity: menuOpacity,
           delay: function (el, i, l) {
             return i * 100;
+          }
+        })
+        .add({
+          duration: this.menuOpen ? (defaultTiming * 1.5) : 0,
+          targets: secondaryMenu,
+          opacity: menuOpacity
+        })
+        .add({
+          targets: secondaryLi,
+          duration: defaultTiming,
+          elasticity: 0,
+          translateX: this.menuOpen ? 20 : 0,
+          opacity: menuOpacity,
+          offset: '-=2000',
+          delay: function (el, i, l) {
+            return i * 50;
           }
         })
     }
