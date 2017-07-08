@@ -1,16 +1,5 @@
-$link: black
-$link-hover: $link
-$container-width: 80vw
-$start-position: -$container-width
-// values taken from Principle
-$defaultEasing: cubic-bezier(0.25, 0.1, 0.25, 1)
-$grey-light: #878080 // secondary nav link
-$yellow: #FFCD00
-$menusY: 80px
-$gutter: 20px
-
 body
-  color: black
+  color: $link
   font-size: 1rem
   font-weight: normal
   line-height: 1.5
@@ -37,7 +26,7 @@ body
   margin: 0 auto
   transition: fill 300ms $defaultEasing
   &.opened
-    fill: black
+    fill: $link
 
 // Menu link
 .menu-link
@@ -65,16 +54,26 @@ body
 .icon-menu-close
   visibility: hidden
 
+.icon-menu-1,
+.icon-menu-2,
+.icon-menu-3
+  transition: all 250ms $defaultEasing
+
 .opened
-  color: black
+  color: $link
   // icons
   .icon-menu-open,
   .icon-menu-close
-    stroke: black
-  .icon-menu-open
-    visibility: hidden
-  .icon-menu-close
-    visibility: visible
+    stroke: $link
+  .icon-menu-1
+    transform-origin: top right
+    transform: rotate(-45deg)
+  .icon-menu-2
+    opacity: 0
+  .icon-menu-3
+    transform-origin: bottom right
+    transform: rotate(45deg)
+
 
 button
   cursor: pointer
@@ -121,7 +120,7 @@ button
     will-change: transform, opacity
   a
     display: inline-block
-    transition: all 0.35s $defaultEasing
+    transition: all 0.45s $defaultEasing
     position: relative
     // yellow bar on hover & active
     &:before
@@ -143,7 +142,6 @@ button
       opacity: 1
       width: 10px
 
-
 .menu-secondary
   display: inline-block
   flex: 1 1 0
@@ -163,19 +161,8 @@ button
       transition: all 0.35s $defaultEasing
     a:hover,
     a.active
-      color: black
+      color: $link
       transform: translateX($gutter/4)
-
-.side-content-wrapper
-  flex: 1 1 auto
-  position: relative
-  opacity: 0
-  will-change: opacity
-  z-index: 9
-
-.side-content
-  background: #FCFCFC
-  will-change: transform
 
 .nav-content
   width: 0

@@ -9,13 +9,9 @@
       <button @click="toggleMenu" class="button menu-link">
         <svg width="13px" height="10px" viewBox="0 0 13 10" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
             <g class="icon-menu-open" fill-rule="evenodd" stroke-linecap="square">
-              <path d="M0,1 L10.9655725,1"></path>
-              <path d="M0,5 L8,5"></path>
-              <path d="M0,9 L10.9655725,9"></path>
-            </g>
-            <g class="icon-menu-close" transform="translate(2,1)">
-              <path d="M1,0 L9,8"></path>
-              <path d="M9,0 L1,8"></path>
+              <path class="icon-menu-1" d="M0,1 L10.9655725,1"></path>
+              <path class="icon-menu-2" d="M0,5 L8,5"></path>
+              <path class="icon-menu-3" d="M0,9 L10.9655725,9"></path>
             </g>
         </svg>
       </button> <b>Menu</b>
@@ -191,4 +187,5 @@ export default {
 <style lang="sass">
 @import './sass/reset'
 @import './sass/app'
+@import './sass/sidecontent'
 </style>
