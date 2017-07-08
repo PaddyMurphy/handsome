@@ -6,7 +6,8 @@ $start-position: -$container-width
 $defaultEasing: cubic-bezier(0.25, 0.1, 0.25, 1)
 $grey-light: #878080 // secondary nav link
 $yellow: #FFCD00
-$menusY: 130px
+$menusY: 80px
+$gutter: 20px
 
 body
   color: black
@@ -52,7 +53,7 @@ body
   top: 34px
   left: 50px
   transition: color 180ms $defaultEasing
-  z-index: 9
+  z-index: 9999 // always on top
   &:hover
     cursor: pointer
 
@@ -93,13 +94,20 @@ button
   top: 0
   left: 0
 
-.menus-container
+.menus-container,
+.menus
   display: flex
-  height: calc(100% - $menuY)
   flex-wrap: wrap
-  margin: $menusY 0 0 4vw
   position: relative
   z-index: 99
+
+.menus-container
+  height: calc(100% - (#{$menusY})
+  margin-top: $menusY
+
+.menus
+  margin-top: $menusY
+  margin-left: 4vw
 
 .menu-primary
   display: inline-block
@@ -130,7 +138,7 @@ button
 
   a:hover,
   a.active
-    transform: translateX(20px) scale(1.08)
+    transform: translateX($gutter) scale(1.08)
     &:before
       opacity: 1
       width: 10px
@@ -140,7 +148,8 @@ button
   display: inline-block
   flex: 1 1 0
   line-height: 2.4
-  margin: -3px 0 0
+  margin-top: -3px
+  margin-right: calc(#{$gutter} * 2)
   position: relative
   z-index: 6
   li
@@ -148,15 +157,25 @@ button
     will-change: transform, opacity
     a
       color: $grey-light
+      display: inline-block
       font-size: 0.75em
       text-transform: uppercase
+      transition: all 0.35s $defaultEasing
+    a:hover,
+    a.active
+      color: black
+      transform: translateX($gutter/4)
+
+.side-content-wrapper
+  flex: 1 1 auto
+  position: relative
+  opacity: 0
+  will-change: opacity
+  z-index: 9
 
 .side-content
   background: #FCFCFC
-  flex: 1 1 auto
-  position: relative
-  width: 0
-  // opacity: 0
+  will-change: transform
 
 .nav-content
   width: 0

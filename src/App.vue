@@ -23,28 +23,34 @@
     <!-- Do not dynamically create menu. This needs to be
          implemented in a static page -->
     <div class="menus-container">
-      <ul class="menu-primary">
-        <li><a href="">Becoming a Student</a></li>
-        <li><a href="">Current Students</a></li>
-        <li><a href="">Parents & Family</a></li>
-        <li><a href="">Faculty & Staff</a></li>
-        <li><a href="">Alumni</a></li>
-      </ul>
+      <div class="menus">
+        <ul class="menu-primary">
+          <li><a href="">Becoming a Student</a></li>
+          <li><a href="">Current Students</a></li>
+          <li><a href="">Parents & Family</a></li>
+          <li><a href="">Faculty & Staff</a></li>
+          <li><a href="">Alumni</a></li>
+        </ul>
 
-      <ul class="menu-secondary">
-        <li><a href="">About Southwestern</a></li>
-        <li><a href="">Majors & Minors</a></li>
-        <li><a href="">Visit Campus</a></li>
-        <li><a href="">Financial Aid</a></li>
-        <li><a href="">Apply</a></li>
-        <li><a href="">Athletics</a></li>
-        <li><a href="">Study Abroad</a></li>
-        <li><a href="">Alumni Success Stories</a></li>
-        <li><a href="">Registrar & Records</a></li>
-        <li><a href="">Student life</a></li>
-      </ul>
-      <!-- TODO: make side content wrap
-      <div class="side-content"> </div> -->
+        <ul class="menu-secondary">
+          <li><a href="">About Southwestern</a></li>
+          <li><a href="">Majors & Minors</a></li>
+          <li><a href="">Visit Campus</a></li>
+          <li><a href="">Financial Aid</a></li>
+          <li><a href="">Apply</a></li>
+          <li><a href="">Athletics</a></li>
+          <li><a href="">Study Abroad</a></li>
+          <li><a href="">Alumni Success Stories</a></li>
+          <li><a href="">Registrar & Records</a></li>
+          <li><a href="">Student life</a></li>
+        </ul>
+      </div>
+      <!-- TODO: make side content wrap -->
+      <div class="side-content-wrapper">
+        <div class="side-content">
+          side content and stuff
+        </div>
+      </div>
     </div>
 
     <div :class="{ open: menuOpen }" class="nav-content">
@@ -108,6 +114,7 @@ export default {
       const secondaryMenu = document.querySelector('.menu-secondary');
       const secondaryLi = secondaryMenu.querySelectorAll('.menu-secondary li');
       const menuLabel = document.querySelector('.menu-label');
+      const sideContent = document.querySelector('.side-content-wrapper');
       const logo = document.querySelector('.logo');
       const menuOpacity = this.menuOpen ? 1 : 0;
       const defaultTiming = 650;
@@ -155,8 +162,8 @@ export default {
           }
         })
         .add({
-          duration: this.menuOpen ? (defaultTiming * 1.5) : 0,
           targets: secondaryMenu,
+          duration: this.menuOpen ? (defaultTiming * 1.5) : 0,
           opacity: menuOpacity
         })
         .add({
@@ -169,6 +176,12 @@ export default {
           delay: function (el, i, l) {
             return i * 50;
           }
+        })
+        .add({
+          targets: sideContent,
+          opacity: menuOpacity,
+          duration: defaultTiming,
+          offset: '-=2000'
         })
     }
   }
