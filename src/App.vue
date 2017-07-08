@@ -109,8 +109,6 @@ export default {
       const secondaryLi = secondaryMenu.querySelectorAll('.menu-secondary li');
       const menuLabel = document.querySelector('.menu-label');
       const logo = document.querySelector('.logo');
-      // const appWidth = this.$el.clientWidth;
-      // const appDirection = this.menuOpen ? appWidth : -appWidth;
       const menuOpacity = this.menuOpen ? 1 : 0;
       const defaultTiming = 650;
 
@@ -120,7 +118,6 @@ export default {
       // Nav container with white background
       anime({
         targets: navContent,
-        // translateX: appDirection,
         width: this.menuOpen ? '100%' : 0,
         easing: this.defaultEasing,
         duration: defaultTiming,

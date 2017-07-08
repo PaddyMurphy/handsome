@@ -6,7 +6,7 @@ $start-position: -$container-width
 $defaultEasing: cubic-bezier(0.25, 0.1, 0.25, 1)
 $grey-light: #878080 // secondary nav link
 $yellow: #FFCD00
-
+$menusY: 130px
 
 body
   color: black
@@ -21,7 +21,7 @@ body
   height: 100vh
   width: $container-width
   min-width: 20em
-  overflow: hidden
+  overflow-x: hidden
   position: relative
 
 .logo
@@ -95,9 +95,9 @@ button
 
 .menus-container
   display: flex
-  height: 100%
+  height: calc(100% - $menuY)
   flex-wrap: wrap
-  margin: 130px 0 0 4vw
+  margin: $menusY 0 0 4vw
   position: relative
   z-index: 99
 
