@@ -1,5 +1,9 @@
 <template>
   <div id="app">
+    <svg class="logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 270.1 300">
+      <path class="st0" d="M127.9 297h-12.7L95 261.6V297H82.2v-60.7H95l20.2 35.5v-35.5h12.7zM169 297h-22.4c-5.6 0-10-4.5-10-10v-40.6c0-5.6 4.5-10 10-10H169c5.6 0 10 4.5 10 10V287c0 5.5-4.5 10-10 10m-4.1-48.7h-14.2c-.5 0-.9.4-.9.9V284c0 .5.4.9.9.9h14.2c.5 0 .9-.4.9-.9v-34.8c0-.5-.4-.9-.9-.9M187.5 236.3h13.2v48.6h19.4V297h-32.6zM267 286.9c0 5.6-4.5 10-10 10h-20.6c-5.6 0-10-4.5-10-10v-8.1h12.9v5.2c0 .5.4.9.9.9H253c.5 0 .9-.4.9-.9v-8.5c0-.6-.5-1-1.2-1.2-1.5-.5-6.4-1.8-17.7-5-5.4-1.5-8.5-3.9-8.5-9.5v-13.6c0-5.6 4.5-10 10-10h20c5.6 0 10 4.5 10 10v8h-12.9v-5.1c0-.5-.4-.9-.9-.9h-12.2c-.5 0-.9.4-.9.9v7.8c0 .7.5 1 1 1.2.9.3 6.1 1.7 18.1 5.1 5.2 1.5 8.2 3.9 8.2 9.5v14.2z"></path>
+      <path class="st0" d="M266.9 3H3.2v282.1l116-104.7c.3-.3.8-.3 1.2 0l15.3 14.1c.3.3.8.3 1.2 0l48.1-44c.3-.3.8-.3 1.2 0l80.9 73.7L266.9 3zm-25.5 168.8L186 121.2c-.3-.3-.8-.3-1.2 0L137 165.4c-.3.3-.8.3-1.2 0l-15.5-14.2c-.3-.3-.8-.3-1.2 0l-51.3 46.4C61.6 185.1 58 171 58 156c0-51 41.4-92.4 92.4-92.4 51 0 92.4 41.4 92.4 92.4 0 5.4-.5 10.7-1.4 15.8"></path>
+    </svg>
 
     <label class="menu-label">
       <button @click="toggleMenu" class="button menu-link">
@@ -94,6 +98,7 @@ export default {
       const primaryMenu = document.querySelector('.menu-primary');
       const primaryLi = document.querySelectorAll('.menu-primary li');
       const menuLabel = document.querySelector('.menu-label');
+      const logo = document.querySelector('.logo');
       const appWidth = this.$el.clientWidth;
       const appDirection = (this.menuOpen) ? appWidth : -appWidth
       // const dir = (this.menuOpen) ? 'normal' : 'reverse';
@@ -114,7 +119,9 @@ export default {
           // } else {
           //   navTimeline.restart()
           // }
-
+          setTimeout(function () {
+            logo.classList.toggle('opened')
+          }, 200)
           // toggle menu icon
           setTimeout(function () {
             menuLabel.classList.toggle('opened')
