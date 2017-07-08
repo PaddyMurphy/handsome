@@ -22,7 +22,7 @@
     </label>
     <!-- Do not dynamically create menu. This needs to be
          implemented in a static page -->
-    <div class="menus">
+    <div class="menus-container">
       <ul class="menu-primary">
         <li><a href="">Becoming a Student</a></li>
         <li><a href="">Current Students</a></li>
@@ -43,6 +43,8 @@
         <li><a href="">Registrar & Records</a></li>
         <li><a href="">Student life</a></li>
       </ul>
+      <!-- TODO: make side content wrap
+      <div class="side-content"> </div> -->
     </div>
 
     <div :class="{ open: menuOpen }" class="nav-content">
@@ -102,12 +104,13 @@ export default {
       const navContent = document.querySelector('.nav-content');
       const primaryMenu = document.querySelector('.menu-primary');
       const primaryLi = primaryMenu.querySelectorAll('.menu-primary li');
+      const firstLink = primaryMenu.querySelector('a');
       const secondaryMenu = document.querySelector('.menu-secondary');
       const secondaryLi = secondaryMenu.querySelectorAll('.menu-secondary li');
       const menuLabel = document.querySelector('.menu-label');
       const logo = document.querySelector('.logo');
-      const appWidth = this.$el.clientWidth;
-      const appDirection = this.menuOpen ? appWidth : -appWidth;
+      // const appWidth = this.$el.clientWidth;
+      // const appDirection = this.menuOpen ? appWidth : -appWidth;
       const menuOpacity = this.menuOpen ? 1 : 0;
       const defaultTiming = 650;
 
@@ -117,17 +120,23 @@ export default {
       // Nav container with white background
       anime({
         targets: navContent,
-        translateX: appDirection,
+        // translateX: appDirection,
+        width: this.menuOpen ? '100%' : 0,
         easing: this.defaultEasing,
         duration: defaultTiming,
         begin: function (anim) {
+          // toggle logo color
           setTimeout(function () {
             logo.classList.toggle('opened')
           }, 200)
           // toggle menu icon
           setTimeout(function () {
             menuLabel.classList.toggle('opened')
-          }, 300)
+          }, 250)
+          // set first nav li active
+          setTimeout(function () {
+            firstLink.classList.toggle('active')
+          }, 400)
         }
       })
       // NOTE: setting duration on open only

@@ -3,8 +3,9 @@ $link-hover: $link
 $container-width: 80vw
 $start-position: -$container-width
 // values taken from Principle
-$defaultEasing: cubic-bezier([0.25, 0.1, 0.25, 1])
+$defaultEasing: cubic-bezier(0.25, 0.1, 0.25, 1)
 $grey-light: #878080 // secondary nav link
+$yellow: #FFCD00
 
 
 body
@@ -33,7 +34,7 @@ body
   left: 0
   right: 0
   margin: 0 auto
-  transition: fill 300ms defaultEasing
+  transition: fill 300ms $defaultEasing
   &.opened
     fill: black
 
@@ -50,6 +51,7 @@ body
   font-size: 14px
   top: 34px
   left: 50px
+  transition: color 180ms $defaultEasing
   z-index: 9
   &:hover
     cursor: pointer
@@ -91,8 +93,9 @@ button
   top: 0
   left: 0
 
-.menus
+.menus-container
   display: flex
+  height: 100%
   flex-wrap: wrap
   margin: 130px 0 0 4vw
   position: relative
@@ -102,28 +105,61 @@ button
   display: inline-block
   flex: 0 1 auto
   line-height: 2
-  margin: 0 4vw 0 0
+  margin: 0 4em 0 0
   position: relative
   z-index: 6
   li
     opacity: 0
+    will-change: transform, opacity
+  a
+    display: inline-block
+    transition: all 0.35s $defaultEasing
+    position: relative
+    // yellow bar on hover & active
+    &:before
+      content: ''
+      background: $yellow
+      display: inline-block
+      position: absolute
+      left: -18px
+      top: 15px
+      width: 0
+      height: 3px
+      opacity: 0
+      transition: all 0.35s $defaultEasing
+
+  a:hover,
+  a.active
+    transform: translateX(20px) scale(1.08)
+    &:before
+      opacity: 1
+      width: 10px
+
 
 .menu-secondary
   display: inline-block
-  flex: 1 1 auto
+  flex: 1 1 0
   line-height: 2.4
   margin: -3px 0 0
   position: relative
   z-index: 6
   li
     opacity: 0
+    will-change: transform, opacity
     a
       color: $grey-light
-      font-size: 0.8em
+      font-size: 0.75em
       text-transform: uppercase
 
+.side-content
+  background: #FCFCFC
+  flex: 1 1 auto
+  position: relative
+  width: 0
+  // opacity: 0
+
 .nav-content
-  left: $start-position
+  width: 0
   z-index: 5
 
 .content
@@ -137,7 +173,6 @@ a
   color: $link
   cursor: pointer
   text-decoration: none
-  // transition: none $speed $easing
   &:hover
     color: $link-hover
   &:visited
