@@ -36,14 +36,23 @@ body
   &:hover
     cursor: pointer
 
-.icon-menu-open
+.icon-menu-open,
+.icon-menu-close
   stroke: white
   stroke-width: 1.5
 
+.icon-menu-close
+  visibility: hidden
+
 .opened
   color: black
-  .icon-menu-open
+  .icon-menu-open,
+  .icon-menu-close
     stroke: black
+  .icon-menu-open
+    visibility: hidden
+  .icon-menu-close
+    visibility: visible
 
 button
   cursor: pointer

@@ -5,9 +5,13 @@
       <button @click="toggleMenu" class="button menu-link">
         <svg width="13px" height="10px" viewBox="0 0 13 10" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
             <g class="icon-menu-open" fill-rule="evenodd" stroke-linecap="square">
-                <path d="M0,1 L10.9655725,1"></path>
-                <path d="M0,5 L8,5"></path>
-                <path d="M0,9 L10.9655725,9"></path>
+              <path d="M0,1 L10.9655725,1"></path>
+              <path d="M0,5 L8,5"></path>
+              <path d="M0,9 L10.9655725,9"></path>
+            </g>
+            <g class="icon-menu-close" transform="translate(2,1)">
+              <path d="M1,0 L9,8"></path>
+              <path d="M9,0 L1,8"></path>
             </g>
         </svg>
       </button> <b>Menu</b>
@@ -57,6 +61,13 @@ export default {
   mounted: function () {
     // set event handlers here since this will
     // be implemented statically
+    const menuLinks = document.querySelectorAll('li a');
+
+    menuLinks.forEach(function (d) {
+      d.addEventListener('click', function (e) {
+        e.preventDefault();
+      })
+    })
   },
   methods: {
     toggleMenu: function (e) {
@@ -79,7 +90,6 @@ export default {
         - show content
     */
     animateMenu: function () {
-      // let timelinePrimary = anime.timeline();
       const navContent = document.querySelector('.nav-content');
       const primaryMenu = document.querySelector('.menu-primary');
       const primaryLi = document.querySelectorAll('.menu-primary li');
@@ -88,7 +98,10 @@ export default {
       const appDirection = (this.menuOpen) ? appWidth : -appWidth
       // const dir = (this.menuOpen) ? 'normal' : 'reverse';
       const menuOpacity = (this.menuOpen) ? 1 : 0;
-      let navTimeline = anime.timeline();
+
+      let navTimeline = anime.timeline({
+        autoplay: true
+      });
       // Menu Container
       anime({
         targets: navContent,
@@ -96,12 +109,20 @@ export default {
         easing: this.defaultEasing,
         duration: 650,
         begin: function (anim) {
+          // if (this.menuOpen) {
+          //   navTimeline.play()
+          // } else {
+          //   navTimeline.restart()
+          // }
+
+          // toggle menu icon
           setTimeout(function () {
             menuLabel.classList.toggle('opened')
           }, 300)
         }
       })
-
+      // TODO: reset animation onclose
+      // currently janky if you click fast
       navTimeline
         .add({
           targets: primaryMenu,
@@ -116,25 +137,6 @@ export default {
             return i * 100;
           }
         })
-
-      // non-timeline version
-      // Primary nav
-      // anime({
-      //   targets: primaryMenu,
-      //   direction: dir,
-      //   opacity: opa,
-      //   delay: 300
-      // });
-
-      // Primary nav lis
-      // anime({
-      //   targets: primaryLi,
-      //   translateX: this.menuOpen ? 20 : 0,
-      //   opacity: opa,
-      //   delay: function (el, i, l) {
-      //     return i * 100;
-      //   }
-      // });
     }
   }
 }
