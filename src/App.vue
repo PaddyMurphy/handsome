@@ -44,7 +44,35 @@
       <!-- TODO: make side content wrap -->
       <div class="side-content-wrapper">
         <div class="side-content">
-          side content and stuff
+
+          <div class="card">
+            <img src="static/img/side-forbes.png" alt="">
+            <small class="card-subtitle">ABOUT SOUTHWESTERN</small>
+            <h2 class="title">FORBES</h2>
+            <p class="info">Forbes names Southwestern as the #1 undergraduate liberal arts college in Texas in its 2016 Grateful Grad Colleges. Southwestern is also recognized as one of Forbes’ top 50 colleges in the South.</p>
+          </div>
+
+          <div class="card">
+            <img src="static/img/side-scac.png" alt="">
+            <small class="card-subtitle">ATHLETICS</small>
+            <h2 class="title">SCAC Championships</h2>
+            <p class="info">Southwestern men's swimming finishes second, women third at SCAC Championships. Mickey Scharbrough captured the 200-yard breaststroke with a time of 2:06.42, while Belaineh also finished third in the 100-yard fr...</p>
+          </div>
+
+          <div class="card">
+            <img src="static/img/side-sarafim.png" alt="">
+            <small class="card-subtitle">ACADEMICS</small>
+            <h2 class="title">Sarofim School of Fine Arts</h2>
+            <p class="info">The Sarofim School of Fine Arts at Southwestern University offers a world-class arts education to our students, and serves the Central Texas community by offering a wide selection of events, each year, in performance and visual arts.</p>
+          </div>
+
+          <div class="card">
+            <img src="static/img/side-clusterfest.png" alt="">
+            <small class="card-subtitle">STUDENT LIFE</small>
+            <h2 class="title">Sleigh Bells at Clusterfest</h2>
+            <p class="info">Clusterfest is a one-day music and arts festival at Southwestern University. Past performers include: Sleigh Bells, Matt & Kim, Del the Funky Homosapien, Black Joe Lewis and the Honeybears and more.</p>
+          </div>
+
         </div>
       </div>
     </div>
@@ -59,6 +87,7 @@
 
 <script>
 import anime from 'animejs';
+// import _ from 'lodash'
 
 export default {
   name: 'app',
@@ -112,6 +141,7 @@ export default {
       const menuLabel = document.querySelector('.menu-label');
       const sideContent = document.querySelector('.side-content-wrapper');
       const logo = document.querySelector('.logo');
+      const cards = document.querySelectorAll('.card');
       const menuOpacity = this.menuOpen ? 1 : 0;
       const defaultTiming = 650;
 
@@ -178,6 +208,16 @@ export default {
           opacity: menuOpacity,
           duration: defaultTiming,
           offset: '-=2000'
+        })
+        .add({
+          targets: cards,
+          opacity: menuOpacity,
+          duration: 1500,
+          offset: '-=1500',
+          translateX: this.menuOpen ? 20 : 0,
+          delay: function (el, i, l) {
+            return i * 150;
+          }
         })
     }
   }

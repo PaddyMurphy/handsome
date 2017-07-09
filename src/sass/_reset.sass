@@ -1,13 +1,25 @@
 $link: black
 $link-hover: $link
-$container-width: 80vw
+$container-width: 100vw
 $start-position: -$container-width
 // values taken from Principle
 $defaultEasing: cubic-bezier(0.25, 0.1, 0.25, 1)
+$easeBoth: cubic-bezier(0.42, 0, 0.58, 0)
+$defaultTiming: 300ms
 $grey-light: #878080 // secondary nav link
 $yellow: #FFCD00
 $menusY: 80px
 $gutter: 20px
+
+// media queries
+@mixin mquery($size)
+  @if $size == small
+    @media (min-width: 675px)
+      @content
+
+  @else if $size == medium
+    @media (min-width: 1000px)
+      @content
 
 html
   background-color: #3D464D

@@ -1,11 +1,41 @@
 .side-content-wrapper
-  flex: 1 1 auto
+  flex: 1 1 auto;
+  height: 100%;
   position: relative
   opacity: 0
   will-change: opacity
   z-index: 9
+  @include mquery(small)
+    flex: 1 1 0
+    // NOTE: overflow-y gets cut off
+    // on short viewports
+    overflow-y: scroll;
 
 .side-content
   background: #FCFCFC
+  border-left: 1px solid #DADBDD
+  min-width: 200px
+  padding: 3em 1em 3em 1em
+  display: flex
+  flex-wrap: wrap
   will-change: transform
 
+.card
+  flex: 1 1 0
+  display: inline-block
+  margin: 0 2em 2em 0
+  max-width: 300px
+  min-width: 150px
+  opacity: 0
+
+.card-subtitle
+  color: $grey-light
+  display: block
+
+.title
+  font-weight: 500
+  padding: 0.5em 0 1em
+
+.info
+  color: $grey-light
+  font-size: 0.875em // 14px
