@@ -1,6 +1,6 @@
 .side-content-wrapper
-  flex: 1 1 auto;
-  height: 100%;
+  flex: 1 1 auto
+  height: 100%
   position: relative
   opacity: 0
   will-change: opacity
@@ -9,20 +9,34 @@
     flex: 1 1 0
     // NOTE: overflow-y gets cut off
     // on short viewports
-    overflow-y: scroll;
+    overflow-y: scroll
 
 .open .side-content-wrapper
     pointer-events: auto
 
 .side-content
-  background: #FCFCFC
+  // background: #FCFCFC
   // background: #ccc
-  border-left: 1px solid #DADBDD
+  background-image: linear-gradient(to right, rgba(0,0,0,0.02) 0%,rgba(0,0,0,0.02) 50%,rgba(5,5,5,0) 50%,rgba(255,255,255,0) 100%)
+  background-size: 200% auto
+  background-position: 100% 0
+  border-top: 1px solid #DADBDD
+  @include mquery(small)
+    border-left: 1px solid #DADBDD
+    border-top: unset
   padding: 3em 1em 3em 1em
   display: flex
   flex-wrap: wrap
+  position: absolute
+  transition: background-position 0.5s
   z-index: 30
   will-change: transform
+
+.open .side-content
+  // animation: moveBackground $defaultTiming $defaultEasing
+  // animation-delay: 500ms
+  transition-delay: 800ms
+  background-position: 0 0
 
 .card
   flex: 1 1 0
@@ -44,3 +58,8 @@
 .info
   color: $grey-light
   font-size: 0.875em // 14px
+
+@keyframes moveBackground
+  0% {background-position: 0% 0%}
+  100% {background-position: 100% 0%}
+
