@@ -176,7 +176,7 @@ button
   flex: 1 1 0
   line-height: 2.4
   margin-top: -3px
-  margin-right: calc(#{$gutter} * 2)
+  margin-right: 5em
   position: relative
   z-index: 6
   li
@@ -249,16 +249,20 @@ a
 
 .github-icon
   align-items: center
+  bottom: 2em
   display: inline-flex
   fill: white
-  justify-content: center
   height: 1.5rem
-  width: 1.5rem
-  position: absolute
+  justify-content: center
   left: $contentGap
-  bottom: 2em
-  transition: fill $defaultEasing 300ms
+  position: absolute
+  transition: fill $defaultEasing 200ms
+  width: 1.5rem
   z-index: 30
+  svg
+    transition: fill $defaultEasing 200ms
+    &:hover
+      fill: #438CFD
 
 .open .github-icon
   fill: black

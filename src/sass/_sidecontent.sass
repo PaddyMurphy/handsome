@@ -15,14 +15,14 @@
     pointer-events: auto
 
 .side-content
-  background-image: linear-gradient(to right, rgba(0,0,0,0.02) 0%,rgba(0,0,0,0.02) 50%,rgba(5,5,5,0) 50%,rgba(255,255,255,0) 100%)
+  background-image: linear-gradient(to right, $grey-lighter 0%, $grey-lighter 50%, rgba(5,5,5,0) 50%, rgba(255,255,255,0) 100%)
   background-size: 200% auto
   background-position: 100% 0
-  border-top: 1px solid #DADBDD
+  border-top: 1px solid #f1f1f1
   @include mquery(small)
-    border-left: 1px solid #DADBDD
+    border-left: 1px solid #f1f1f1
     border-top: unset
-  padding: 3em 1em 3em 1em
+  padding: 2em 1.2em 1em 0.7em // account for translateX
   display: flex
   flex-wrap: wrap
   position: absolute
