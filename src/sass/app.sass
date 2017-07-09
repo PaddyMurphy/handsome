@@ -57,7 +57,7 @@ body
   position: absolute
   font-size: 14px
   top: 30px
-  left: 50px
+  left: $contentGap
   transition: color 100ms $defaultEasing
   z-index: 9999 // always on top
   &:hover
@@ -207,7 +207,7 @@ button
 .tagline
   position: absolute
   top: 30vh
-  left: 6vw
+  left: $contentGap
   width: 80vw
   @include mquery(small)
     width: 50vw
@@ -242,3 +242,23 @@ a
 .is-hidden
   display: none !important
 
+.show-accessible
+  position: absolute !important
+  top: -9999px !important
+  left: -9999px !important
+
+.github-icon
+  align-items: center
+  display: inline-flex
+  fill: white
+  justify-content: center
+  height: 1.5rem
+  width: 1.5rem
+  position: absolute
+  left: $contentGap
+  bottom: 2em
+  transition: fill $defaultEasing 300ms
+  z-index: 30
+
+.open .github-icon
+  fill: black
