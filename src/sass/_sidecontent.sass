@@ -30,7 +30,7 @@
   position: absolute
   transition: background-position 0.5s
   z-index: 30
-  will-change: transform
+  will-change: background-position
 
 .open .side-content
   // animation: moveBackground $defaultTiming $defaultEasing
@@ -58,8 +58,3 @@
 .info
   color: $grey-light
   font-size: 0.875em // 14px
-
-@keyframes moveBackground
-  0% {background-position: 0% 0%}
-  100% {background-position: 100% 0%}
-

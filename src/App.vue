@@ -6,7 +6,7 @@
     </svg>
 
     <label class="menu-label">
-      <button @click="toggleMenu" class="button menu-link">
+      <button @click="toggleMenu" role="button" aria-label="toggle menu" class="button menu-link">
         <svg width="13px" height="10px" viewBox="0 0 13 10" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
             <g class="icon-menu-open" fill-rule="evenodd" stroke-linecap="square">
               <path class="icon-menu-1" d="M0,1 L10.9655725,1"></path>
