@@ -2,10 +2,12 @@ $link: black
 $link-hover: $link
 $container-width: 100vw
 $start-position: -$container-width
+$defaultFont: BlinkMacSystemFont, -apple-system, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", "Helvetica", "Arial", sans-serif
 // values taken from Principle
 $defaultEasing: cubic-bezier(0.25, 0.1, 0.25, 1)
 $easeBoth: cubic-bezier(0.42, 0, 0.58, 0)
 $defaultTiming: 300ms
+$letterSpacing: 1.29px
 $grey-light: #878080 // secondary nav link
 $yellow: #FFCD00
 $menusY: 80px
@@ -23,7 +25,7 @@ $gutter: 20px
 
 html
   background-color: #3D464D
-  font-family: BlinkMacSystemFont, -apple-system, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", "Helvetica", "Arial", sans-serif
+  font-family: $defaultFont
   font-size: 1rem
   -moz-osx-font-smoothing: grayscale
   -webkit-font-smoothing: antialiased

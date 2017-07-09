@@ -32,7 +32,7 @@
         </ul>
 
         <ul class="menu-secondary">
-          <li><a href="">About Southwestern</a></li>
+          <li><a href="">About NOLS</a></li>
           <li><a href="">Majors & Minors</a></li>
           <li><a href="">Visit Campus</a></li>
           <li><a href="">Financial Aid</a></li>
@@ -50,40 +50,53 @@
 
           <div class="card">
             <img src="static/img/side-forbes.png" alt="">
-            <small class="card-subtitle">ABOUT SOUTHWESTERN</small>
+            <small class="card-subtitle">ABOUT NOLS</small>
             <h2 class="title">FORBES</h2>
-            <p class="info">Forbes names Southwestern as the #1 undergraduate liberal arts college in Texas in its 2016 Grateful Grad Colleges. Southwestern is also recognized as one of Forbes’ top 50 colleges in the South.</p>
+            <p class="info">Forbes names NOLS as the #1 outdoor education school in its 2016 Grateful Grad Colleges. NOLS is also recognized as one of Forbes’ top 50 colleges in the South.</p>
           </div>
 
           <div class="card">
-            <img src="static/img/side-scac.png" alt="">
+            <img src="static/img/side-jacobswell.png" alt="">
             <small class="card-subtitle">ATHLETICS</small>
-            <h2 class="title">SCAC Championships</h2>
-            <p class="info">Southwestern men's swimming finishes second, women third at SCAC Championships. Mickey Scharbrough captured the 200-yard breaststroke with a time of 2:06.42, while Belaineh also finished third in the 100-yard fr...</p>
+            <h2 class="title">Jacob's Well Diving</h2>
+            <p class="info">NOLS men's swimming finishes second, women third at SCAC Championships. Mickey Scharbrough captured the 200-yard breaststroke with a time of 2:06.42, while Belaineh also finished third in the 100-yard fr...</p>
           </div>
 
           <div class="card">
-            <img src="static/img/side-sarafim.png" alt="">
+            <img src="static/img/side-mtadams.png" alt="">
             <small class="card-subtitle">ACADEMICS</small>
-            <h2 class="title">Sarofim School of Fine Arts</h2>
-            <p class="info">The Sarofim School of Fine Arts at Southwestern University offers a world-class arts education to our students, and serves the Central Texas community by offering a wide selection of events, each year, in performance and visual arts.</p>
+            <h2 class="title">School of Mountaineering</h2>
+            <p class="info">The School of Mountaineering at NOLS University offers a world-class arts education to our students, and serves the Central Texas community by offering a wide selection of events, each year, in performance and visual arts.</p>
           </div>
 
           <div class="card">
-            <img src="static/img/side-clusterfest.png" alt="">
+            <img src="static/img/side-devilsriver.png" alt="">
             <small class="card-subtitle">STUDENT LIFE</small>
-            <h2 class="title">Sleigh Bells at Clusterfest</h2>
-            <p class="info">Clusterfest is a one-day music and arts festival at Southwestern University. Past performers include: Sleigh Bells, Matt & Kim, Del the Funky Homosapien, Black Joe Lewis and the Honeybears and more.</p>
+            <h2 class="title">Devils River Expedition</h2>
+            <p class="info">Devils River is a 4-day paddling and camping festival at NOLS University. Past performers include: Sleigh Bells, Matt & Kim, Del the Funky Homosapien, Black Joe Lewis and the Honeybears and more.</p>
+          </div>
+
+          <div class="card">
+            <img src="static/img/side-shuksan.png" alt="">
+            <small class="card-subtitle">NEW SKILLS</small>
+            <h2 class="title">Mount Shuksan Expedtion</h2>
+            <p class="info">Mount Shuksan is a 4-day paddling and camping festival at NOLS University. Past performers include: Sleigh Bells, Matt & Kim, Del the Funky Homosapien, Black Joe Lewis and the Honeybears and more.</p>
           </div>
 
         </div>
       </div> <!-- END .side-content-wrapper -->
     </div>
 
-    <div class="nav-content">
-    </div>
+    <!-- white background that's animated -->
+    <div class="nav-content"></div>
 
-    <div class="content" style="background-image: url('static/img/bugaboo-spire.jpg')"><!-- home page content --></div>
+    <div class="content" style="background-image: url('static/img/bugaboo-spire.jpg')">
+      <!-- homepage content -->
+      <div class="tagline">
+        <h1>Foster the Next Generation. Give Today to Reach Tomorrow.</h1>
+        <button class="button-donate">DONATE TO NOLS</button>
+      </div>
+    </div>
 
   </div>
 </template>
@@ -136,15 +149,14 @@ export default {
       // const vm = this;
       const navContent = document.querySelector('.nav-content');
       const primaryMenu = document.querySelector('.menu-primary');
-      const primaryLi = primaryMenu.querySelectorAll('.menu-primary li');
+      const primaryLi = primaryMenu.querySelectorAll('li');
       const firstLink = primaryMenu.querySelector('a');
       const secondaryMenu = document.querySelector('.menu-secondary');
-      const secondaryLi = secondaryMenu.querySelectorAll('.menu-secondary li');
+      const secondaryLi = secondaryMenu.querySelectorAll('li');
       const menuLabel = document.querySelector('.menu-label');
       const button = menuLabel.querySelector('.button');
       const sideContent = document.querySelector('.side-content-wrapper');
       const logo = document.querySelector('.logo');
-      // const header = document.querySelector('.header');
       const cards = document.querySelectorAll('.card');
 
       const menuOpacity = this.menuOpen ? 1 : 0;
@@ -215,11 +227,13 @@ export default {
         .add({
           targets: sideContent,
           opacity: menuOpacity,
+          width: this.menuOpen ? '100%' : 0,
           duration: defaultTiming,
           offset: '-=2000'
         })
         .add({
           targets: cards,
+          elasticity: 0,
           opacity: menuOpacity,
           duration: 1500,
           offset: '-=1500',
@@ -234,6 +248,7 @@ export default {
 </script>
 
 <style lang="sass">
+@import url('//fonts.googleapis.com/css?family=Playfair+Display:900');
 @import './sass/reset'
 @import './sass/app'
 @import './sass/sidecontent'
