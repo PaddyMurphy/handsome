@@ -14,6 +14,24 @@ body
   overflow-x: hidden
   position: relative
 
+.header
+  background: white
+  box-shadow: 0 0 6px 4px rgba(0,0,0,0.08);
+  height: $menusY
+  position: absolute
+  top: 0
+  left: 0
+  opacity: 0
+  transform: translateY(-80px)
+  transition: all $defaultEasing 200ms
+  width: 100vw
+  will-change: opacity, transform
+  z-index: 30
+
+.open .header
+  transform: translateY(0)
+  opacity: 1
+
 .logo
   fill: white
   position: absolute
@@ -25,8 +43,9 @@ body
   right: 0
   margin: 0 auto
   transition: fill $defaultTiming $defaultEasing
-  &.opened
-    fill: $link
+
+.open .logo
+  fill: $link
 
 // Menu link
 .menu-link
@@ -39,12 +58,14 @@ body
   text-transform: none
   position: absolute
   font-size: 14px
-  top: 34px
+  top: 30px
   left: 50px
-  transition: color 180ms $defaultEasing
+  transition: color 100ms $defaultEasing
   z-index: 9999 // always on top
   &:hover
     cursor: pointer
+  b
+    transition: color 100ms $defaultEasing
 
 .icon-menu-open
   stroke: white
@@ -55,7 +76,7 @@ body
 .icon-menu-3
   transition: all 250ms $defaultEasing
 
-.opened
+.open
   color: $link
   // icons
   .icon-menu-open
@@ -77,6 +98,14 @@ button
   &:focus
     outline: none
 
+// indicate disabled... bad idea
+// button:disabled,
+// button[disabled]
+//   .icon-menu-open
+//    stroke: rgba(0,0,0,0.8)
+//   ~ b
+//    color: rgba(0,0,0,0.8)
+
 // content and nav
 .content,
 .nav-content
@@ -93,11 +122,15 @@ button
   display: flex
   flex-wrap: wrap
   position: relative
-  z-index: 99
+  z-index: 20
 
 .menus-container
   height: calc(100% - (#{$menusY})
   margin-top: $menusY
+  pointer-events: none;
+
+.open .menus-container
+    pointer-events: auto
 
 .menus
   margin-top: $menusY
@@ -110,6 +143,7 @@ button
   margin: 0 4em 0 0
   position: relative
   z-index: 6
+
   li
     opacity: 0
     will-change: transform, opacity
