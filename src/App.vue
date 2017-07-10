@@ -20,7 +20,7 @@
     <div class="header"></div>
     <!-- Do not dynamically create menu. This needs to be
          implemented in a static page -->
-    <div class="menus-container">
+    <div class="menus-container is-hidden">
       <div class="menus">
         <ul class="menu-primary">
           <li><a href="">Becoming a Student</a></li>
@@ -108,7 +108,7 @@
 <script>
 import anime from 'animejs';
 
-let navContent, menuLinks, primaryMenu, primaryLi, firstLink, secondaryMenu, secondaryLi, menuLabel, button, sideContent, logo, cards;
+let menuContainer, navContent, menuLinks, primaryMenu, primaryLi, firstLink, secondaryMenu, secondaryLi, menuLabel, button, sideContent, logo, cards;
 
 const defaultTiming = 650;
 // from Principle
@@ -124,8 +124,8 @@ export default {
   mounted: function () {
     // set event handlers here since this will
     // be implemented statically
-
     // set selectors once
+    menuContainer = document.querySelector('.menus-container');
     navContent = document.querySelector('.nav-content');
     primaryMenu = document.querySelector('.menu-primary');
     primaryLi = primaryMenu.querySelectorAll('li');
@@ -137,7 +137,6 @@ export default {
     sideContent = document.querySelector('.side-content-wrapper');
     logo = document.querySelector('.logo');
     cards = document.querySelectorAll('.card');
-
     menuLinks = document.querySelectorAll('li a');
 
     menuLinks.forEach(function (d) {
@@ -151,6 +150,11 @@ export default {
       this.menuOpen = !this.menuOpen;
       // disable clicking quickly
       e.target.disabled = true;
+      // TODO:
+      // should the menu content be hidden or accessible when closed
+      // invisible text without display:none could hurt google rankings
+      menuContainer.classList.toggle('is-hidden')
+
       this.animateMenu();
     },
     /*
