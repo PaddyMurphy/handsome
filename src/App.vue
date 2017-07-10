@@ -107,20 +107,38 @@
 
 <script>
 import anime from 'animejs';
-// import _ from 'lodash'
+
+let navContent, menuLinks, primaryMenu, primaryLi, firstLink, secondaryMenu, secondaryLi, menuLabel, button, sideContent, logo, cards;
+
+const defaultTiming = 650;
+// from Principle
+const defaultEasing = [0.25, 0.1, 0.25, 1];
 
 export default {
   name: 'app',
   data () {
     return {
-      menuOpen: false,
-      defaultEasing: [0.25, 0.1, 0.25, 1] // from Principle
+      menuOpen: false
     }
   },
   mounted: function () {
     // set event handlers here since this will
     // be implemented statically
-    const menuLinks = document.querySelectorAll('li a');
+
+    // set selectors once
+    navContent = document.querySelector('.nav-content');
+    primaryMenu = document.querySelector('.menu-primary');
+    primaryLi = primaryMenu.querySelectorAll('li');
+    firstLink = primaryMenu.querySelector('a');
+    secondaryMenu = document.querySelector('.menu-secondary');
+    secondaryLi = secondaryMenu.querySelectorAll('li');
+    menuLabel = document.querySelector('.menu-label');
+    button = menuLabel.querySelector('.button');
+    sideContent = document.querySelector('.side-content-wrapper');
+    logo = document.querySelector('.logo');
+    cards = document.querySelectorAll('.card');
+
+    menuLinks = document.querySelectorAll('li a');
 
     menuLinks.forEach(function (d) {
       d.addEventListener('click', function (e) {
@@ -150,21 +168,7 @@ export default {
         - show content
     */
     animateMenu: function () {
-      // const vm = this;
-      const navContent = document.querySelector('.nav-content');
-      const primaryMenu = document.querySelector('.menu-primary');
-      const primaryLi = primaryMenu.querySelectorAll('li');
-      const firstLink = primaryMenu.querySelector('a');
-      const secondaryMenu = document.querySelector('.menu-secondary');
-      const secondaryLi = secondaryMenu.querySelectorAll('li');
-      const menuLabel = document.querySelector('.menu-label');
-      const button = menuLabel.querySelector('.button');
-      const sideContent = document.querySelector('.side-content-wrapper');
-      const logo = document.querySelector('.logo');
-      const cards = document.querySelectorAll('.card');
-
       const menuOpacity = this.menuOpen ? 1 : 0;
-      const defaultTiming = 650;
 
       let navTimeline = anime.timeline({
         autoplay: true
@@ -173,7 +177,7 @@ export default {
       anime({
         targets: navContent,
         width: this.menuOpen ? '100%' : 0,
-        easing: this.defaultEasing,
+        easing: defaultEasing,
         duration: defaultTiming,
         begin: function (anim) {
           // toggle logo color
