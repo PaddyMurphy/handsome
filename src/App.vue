@@ -23,7 +23,7 @@
     <div class="menus-container is-hidden">
       <div class="menus">
         <ul class="menu-primary">
-          <li><a href="">Becoming a Student</a></li>
+          <li><a href="" @mouseover="animateSecondary">Becoming a Student</a></li>
           <li><a href="">Current Students</a></li>
           <li><a href="">Parents & Family</a></li>
           <li><a href="">Faculty & Staff</a></li>
@@ -108,7 +108,7 @@
 <script>
 import anime from 'animejs';
 
-let menuContainer, navContent, menuLinks, primaryMenu, primaryLi, firstLink, secondaryMenu, secondaryLi, menuLabel, button, sideContent, logo, cards;
+let menuContainer, navContent, menuLinks, primaryMenu, primaryLi, secondaryMenu, secondaryLi, menuLabel, button, sideContent, logo, cards;
 
 const defaultTiming = 650;
 // from Principle
@@ -129,7 +129,7 @@ export default {
     navContent = document.querySelector('.nav-content');
     primaryMenu = document.querySelector('.menu-primary');
     primaryLi = primaryMenu.querySelectorAll('li');
-    firstLink = primaryMenu.querySelector('a');
+    // firstLink = primaryMenu.querySelector('a');
     secondaryMenu = document.querySelector('.menu-secondary');
     secondaryLi = secondaryMenu.querySelectorAll('li');
     menuLabel = document.querySelector('.menu-label');
@@ -138,6 +138,8 @@ export default {
     logo = document.querySelector('.logo');
     cards = document.querySelectorAll('.card');
     menuLinks = document.querySelectorAll('li a');
+
+    // TODO: left menu Gap = 50px;
 
     menuLinks.forEach(function (d) {
       d.addEventListener('click', function (e) {
@@ -153,7 +155,10 @@ export default {
       // TODO:
       // should the menu content be hidden or accessible when closed
       // invisible text without display:none could hurt google rankings
-      menuContainer.classList.toggle('is-hidden')
+      menuContainer.classList.toggle('is-hidden');
+      if (!this.menuOpen) {
+        this.animateSecondary()
+      }
 
       this.animateMenu();
     },
@@ -174,9 +179,7 @@ export default {
     animateMenu: function () {
       const menuOpacity = this.menuOpen ? 1 : 0;
 
-      let navTimeline = anime.timeline({
-        autoplay: true
-      });
+      let navTimeline = anime.timeline();
       // Nav container with white background
       anime({
         targets: navContent,
@@ -192,10 +195,6 @@ export default {
           setTimeout(function () {
             menuLabel.classList.toggle('open')
           }, 100)
-          // set first nav li active
-          setTimeout(function () {
-            firstLink.classList.toggle('active')
-          }, 400)
         }
       })
       // NOTE: setting duration on open only
@@ -209,29 +208,39 @@ export default {
         })
         .add({
           targets: primaryLi,
-          elasticity: 0,
-          translateX: this.menuOpen ? 20 : 0,
+          elasticity: 0, // TODO: see about separate timing
+          easing: defaultEasing,
+          translateX: this.menuOpen ? 50 : 0,
           opacity: menuOpacity,
           delay: function (el, i, l) {
-            return i * 100;
+            return i * 90;
           },
           complete: function () {
             // reenable menu button
             button.disabled = false;
           }
         })
+    },
+    // TODO: opacity & translateX values are not reset
+    //       primary is because of click
+    animateSecondary: function () {
+      const menuOpacity = this.menuOpen ? 1 : 0;
+
+      let secondaryNavTimeline = anime.timeline();
+
+      secondaryNavTimeline
         .add({
           targets: secondaryMenu,
-          duration: this.menuOpen ? (defaultTiming * 1.5) : 0,
+          duration: this.menuOpen ? 300 : 0,
           opacity: menuOpacity
         })
         .add({
           targets: secondaryLi,
           duration: defaultTiming,
+          easing: defaultEasing,
           elasticity: 0,
-          translateX: this.menuOpen ? 40 : 0,
+          translateX: this.menuOpen ? [0, 50] : 0,
           opacity: menuOpacity,
-          offset: '-=2000',
           delay: function (el, i, l) {
             return i * 70;
           }
@@ -239,21 +248,57 @@ export default {
         .add({
           targets: sideContent,
           opacity: menuOpacity,
-          width: this.menuOpen ? '100%' : 0,
-          duration: defaultTiming,
-          offset: '-=2000'
+          width: this.menuOpen ? [0, '100%'] : 0,
+          duration: defaultTiming
         })
         .add({
           targets: cards,
           elasticity: 0,
           opacity: menuOpacity,
           duration: 1500,
-          offset: '-=1500',
-          translateX: this.menuOpen ? 20 : 0,
+          offset: '-=500',
+          translateX: this.menuOpen ? [0, 20] : 0,
           delay: function (el, i, l) {
             return i * 150;
           }
         })
+
+        // ORIGINAL
+
+        // .add({
+        //   targets: secondaryMenu,
+        //   duration: this.menuOpen ? (defaultTiming * 1.5) : 0,
+        //   opacity: menuOpacity
+        // })
+        // .add({
+        //   targets: secondaryLi,
+        //   duration: defaultTiming,
+        //   elasticity: 0,
+        //   translateX: this.menuOpen ? 40 : 0,
+        //   opacity: menuOpacity,
+        //   offset: '-=2000',
+        //   delay: function (el, i, l) {
+        //     return i * 70;
+        //   }
+        // })
+        // .add({
+        //   targets: sideContent,
+        //   opacity: menuOpacity,
+        //   width: this.menuOpen ? '100%' : 0,
+        //   duration: defaultTiming,
+        //   offset: '-=2000'
+        // })
+        // .add({
+        //   targets: cards,
+        //   elasticity: 0,
+        //   opacity: menuOpacity,
+        //   duration: 1500,
+        //   offset: '-=1500',
+        //   translateX: this.menuOpen ? 20 : 0,
+        //   delay: function (el, i, l) {
+        //     return i * 150;
+        //   }
+        // })
     }
   }
 }
